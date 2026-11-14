@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LaunchAtLogin/LaunchAtLogin.csproj" />
+  <Project Path="LaunchAtLogin.Tests/LaunchAtLogin.Tests.csproj" />
+</Solution>
