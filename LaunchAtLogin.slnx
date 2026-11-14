@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="LaunchAtLogin/LaunchAtLogin.csproj" />
+  <Project Path="LaunchAtLogin.E2E/LaunchAtLogin.E2E.csproj" />
   <Project Path="LaunchAtLogin.Tests/LaunchAtLogin.Tests.csproj" />
 </Solution>
