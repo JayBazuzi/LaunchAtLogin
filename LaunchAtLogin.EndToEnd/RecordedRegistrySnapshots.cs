@@ -33,7 +33,7 @@ class RecordedRegistrySnapshots
     /// <summary>Throws <see cref="SnapshotMismatchException"/> unless the recording has this snapshot, exactly.</summary>
     public void Verify(SnapshotName name, RegistrySnapshot actual)
     {
-        var expected = this.Find(name);
+        var expected = Find(name);
         if (expected != actual)
         {
             throw new SnapshotMismatchException(name, expected, actual);

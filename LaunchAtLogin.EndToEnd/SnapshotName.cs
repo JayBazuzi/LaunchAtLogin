@@ -1,4 +1,4 @@
-namespace LaunchAtLogin.EndToEnd;
+﻿namespace LaunchAtLogin.EndToEnd;
 
 public enum SnapshotName
 {

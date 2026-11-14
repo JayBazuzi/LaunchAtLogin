@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using FlaUI.Core.AutomationElements;
 using FlaUI.UIA3;
 

@@ -1,4 +1,4 @@
-namespace LaunchAtLogin.EndToEnd;
+﻿namespace LaunchAtLogin.EndToEnd;
 
 class SnapshotMismatchException(SnapshotName name, RegistrySnapshot? expected, RegistrySnapshot actual)
     : EndToEndFailureException($"""

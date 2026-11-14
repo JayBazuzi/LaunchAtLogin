@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using Microsoft.Win32;
 
 namespace LaunchAtLogin.EndToEnd;
@@ -29,8 +29,8 @@ record RegistrySnapshot(string? Run, string? StartupApproved)
     /// <summary>Writes these values for the app, filling in the exe path and putting an arbitrary time in masked timestamp bytes.</summary>
     public void WriteTo(IRegistry registry, string appName, string exePath)
     {
-        WriteOrDelete(registry, StartupApp.RunKeyPath, appName, this.Run?.Replace(ExePathPlaceholder, exePath, StringComparison.Ordinal), RegistryValueKind.String);
-        WriteOrDelete(registry, StartupApp.StartupApprovedKeyPath, appName, UnmaskTimestamp(this.StartupApproved), RegistryValueKind.Binary);
+        WriteOrDelete(registry, StartupApp.RunKeyPath, appName, Run?.Replace(ExePathPlaceholder, exePath, StringComparison.Ordinal), RegistryValueKind.String);
+        WriteOrDelete(registry, StartupApp.StartupApprovedKeyPath, appName, UnmaskTimestamp(StartupApproved), RegistryValueKind.Binary);
     }
 
     static void WriteOrDelete(IRegistry registry, string keyPath, string valueName, object? value, RegistryValueKind kind)

@@ -1,4 +1,4 @@
-using LaunchAtLogin.EndToEnd;
+﻿using LaunchAtLogin.EndToEnd;
 using Microsoft.Extensions.Time.Testing;
 
 namespace LaunchAtLogin.Tests;
@@ -24,7 +24,7 @@ public class RecordedRegistrySnapshotsTests
     {
         this._startupApp.TurnOn(AN_APP_PATH);
 
-        this.AssertMatchesRecording(SnapshotName.AfterTurnOn);
+        AssertMatchesRecording(SnapshotName.AfterTurnOn);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class RecordedRegistrySnapshotsTests
 
         this._startupApp.TurnOff();
 
-        this.AssertMatchesRecording(SnapshotName.AfterTurnOff);
+        AssertMatchesRecording(SnapshotName.AfterTurnOff);
     }
 
     [Theory]
@@ -46,14 +46,14 @@ public class RecordedRegistrySnapshotsTests
     [InlineData(SnapshotName.AfterTurnOff, false)]
     public void ReadsRecordedValuesCorrectly(SnapshotName name, bool expectedIsOn)
     {
-        this.RecordedOrSkip(name).WriteTo(this._registry, AN_APP_NAME, AN_APP_PATH);
+        RecordedOrSkip(name).WriteTo(this._registry, AN_APP_NAME, AN_APP_PATH);
 
         Assert.Equal(expectedIsOn, this._startupApp.IsOn);
     }
 
     void AssertMatchesRecording(SnapshotName name)
     {
-        var expected = this.RecordedOrSkip(name);
+        var expected = RecordedOrSkip(name);
         var actual = RegistrySnapshot.Take(this._registry, AN_APP_NAME, AN_APP_PATH);
         Assert.Equal(expected, actual);
     }
