@@ -5,8 +5,8 @@ using LaunchAtLogin;
 // The Run key launches this exe with no arguments; people run it with "manual".
 var wasLaunchedAtLogin = args.Length == 0;
 
-var startupApp = new StartupApp("LaunchAtLogin.E2E");
-var progressFile = Path.Combine(Path.GetTempPath(), "LaunchAtLogin.E2E.progress.txt");
+var startupApp = new StartupApp("LaunchAtLogin.EndToEnd");
+var progressFile = Path.Combine(Path.GetTempPath(), "LaunchAtLogin.EndToEnd.progress.txt");
 var progress = ReadProgress();
 
 if (progress is null)
@@ -38,7 +38,7 @@ void StartExpectingLaunchWhileOn()
 
         Now log out and back in.
         This program should open by itself and say PASS.
-        If it doesn't, run: dotnet run --project LaunchAtLogin.E2E -- manual
+        If it doesn't, run: dotnet run --project LaunchAtLogin.EndToEnd -- manual
         """);
 }
 
@@ -58,7 +58,7 @@ void FinishExpectingLaunchWhileOn(bool launchedAtLogin)
         Stage 2 of 2: turned it off, the way Task Manager does.
         Now log out and back in again.
         This program should NOT open by itself. After logging in, run:
-          dotnet run --project LaunchAtLogin.E2E -- manual
+          dotnet run --project LaunchAtLogin.EndToEnd -- manual
         """);
 }
 
