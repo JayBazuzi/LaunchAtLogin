@@ -38,7 +38,7 @@ Every C# project enables these, usually once in `Directory.Build.props`:
 - When a rule fires, fix the code rather than suppressing the rule.
   If a suppression is truly needed, keep it as narrow as possible and add a comment saying why.
 
-## Language features
+## Languge features
 
 These are not caught by analyzers:
 
