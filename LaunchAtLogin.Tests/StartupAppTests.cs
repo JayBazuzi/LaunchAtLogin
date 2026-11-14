@@ -2,20 +2,18 @@ using Microsoft.Win32;
 
 namespace LaunchAtLogin.Tests;
 
-public class StartupAppTests : IDisposable
+public class StartupAppTests
 {
     const string AN_APP_NAME = "TestApp";
     const string AN_APP_PATH = @"C:\TestApp.exe";
 
-    readonly string _testKeyPath = $@"Software\LaunchAtLogin.Tests.{Guid.NewGuid()}";
+    readonly FakeRegistry _registry = new();
     readonly StartupApp _startupApp;
 
     public StartupAppTests()
     {
-        this._startupApp = new StartupApp(AN_APP_NAME, $@"{this._testKeyPath}\Run", $@"{this._testKeyPath}\StartupApproved", TimeProvider.System);
+        this._startupApp = new StartupApp(AN_APP_NAME, TimeProvider.System, this._registry);
     }
-
-    public void Dispose() => Registry.CurrentUser.DeleteSubKeyTree(this._testKeyPath, throwOnMissingSubKey: false);
 
     [Fact]
     public void AddToStartupAppsRunsTheExeQuoted()
@@ -114,10 +112,7 @@ public class StartupAppTests : IDisposable
     public void TaskManagerTurnedOnIsOn()
     {
         this._startupApp.AddToStartupApps(AN_APP_PATH);
-        using (var key = Registry.CurrentUser.CreateSubKey($@"{this._testKeyPath}\StartupApproved"))
-        {
-            key.SetValue(AN_APP_NAME, new byte[] { 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, RegistryValueKind.Binary);
-        }
+        this._registry.SetValue(StartupApp.StartupApprovedKeyPath, AN_APP_NAME, new byte[] { 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, RegistryValueKind.Binary);
 
         Assert.True(this._startupApp.IsOn);
     }

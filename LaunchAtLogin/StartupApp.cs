@@ -20,22 +20,20 @@ public class StartupApp
 
     const int TaskManagerMarkerTimestampOffset = 4;
 
-    readonly string _runKeyPath;
-    readonly string _startupApprovedKeyPath;
     readonly TimeProvider _timeProvider;
+    readonly IRegistry _registry;
 
     public StartupApp(string name)
-        : this(name, RunKeyPath, StartupApprovedKeyPath, TimeProvider.System)
+        : this(name, TimeProvider.System, new CurrentUserRegistry())
     {
     }
 
-    internal StartupApp(string name, string runKeyPath, string startupApprovedKeyPath, TimeProvider timeProvider)
+    internal StartupApp(string name, TimeProvider timeProvider, IRegistry registry)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         this.Name = name;
-        this._runKeyPath = runKeyPath;
-        this._startupApprovedKeyPath = startupApprovedKeyPath;
         this._timeProvider = timeProvider;
+        this._registry = registry;
     }
 
     public string Name { get; }
@@ -44,8 +42,7 @@ public class StartupApp
     {
         get
         {
-            using var key = Registry.CurrentUser.OpenSubKey(this._runKeyPath);
-            return key?.GetValue(this.Name) as string;
+            return this._registry.GetValue(RunKeyPath, this.Name) as string;
         }
     }
 
@@ -59,18 +56,13 @@ public class StartupApp
     public void AddToStartupApps(string? exePath = null)
     {
         exePath ??= Environment.ProcessPath ?? throw new InvalidOperationException("Can't tell this process's exe path. Pass exePath.");
-        using var key = Registry.CurrentUser.CreateSubKey(this._runKeyPath);
-        key.SetValue(this.Name, $"\"{exePath}\"");
+        this._registry.SetValue(RunKeyPath, this.Name, $"\"{exePath}\"", RegistryValueKind.String);
     }
 
     /// <summary>Removes the app from the startup apps, and forgets whether it was turned off. Call from an uninstaller.</summary>
     public void RemoveFromStartupApps()
     {
-        using (var runKey = Registry.CurrentUser.OpenSubKey(this._runKeyPath, writable: true))
-        {
-            runKey?.DeleteValue(this.Name, throwOnMissingValue: false);
-        }
-
+        this._registry.DeleteValueIfPresent(RunKeyPath, this.Name);
         this.ForgetWhetherTurnedOff();
     }
 
@@ -92,22 +84,17 @@ public class StartupApp
         turnedOffMarker[0] = TaskManagerTurnedOffFirstMarkerByte;
         var turnedOffAtFileTimeUtc = this._timeProvider.GetUtcNow().UtcDateTime.ToFileTimeUtc();
         BitConverter.GetBytes(turnedOffAtFileTimeUtc).CopyTo(turnedOffMarker, TaskManagerMarkerTimestampOffset);
-        using var key = Registry.CurrentUser.CreateSubKey(this._startupApprovedKeyPath);
-        key.SetValue(this.Name, turnedOffMarker, RegistryValueKind.Binary);
+        this._registry.SetValue(StartupApprovedKeyPath, this.Name, turnedOffMarker, RegistryValueKind.Binary);
     }
-
-
 
     bool IsTurnedOffInStartupApproved()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(this._startupApprovedKeyPath);
-        return key?.GetValue(this.Name) is byte[] { Length: > 0 } marker
+        return this._registry.GetValue(StartupApprovedKeyPath, this.Name) is byte[] { Length: > 0 } marker
             && (marker[0] & TurnedOffBitInFirstMarkerByte) != 0;
     }
 
     void ForgetWhetherTurnedOff()
     {
-        using var key = Registry.CurrentUser.OpenSubKey(this._startupApprovedKeyPath, writable: true);
-        key?.DeleteValue(this.Name, throwOnMissingValue: false);
+        this._registry.DeleteValueIfPresent(StartupApprovedKeyPath, this.Name);
     }
 }
