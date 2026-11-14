@@ -17,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     <InternalsVisibleTo Include="LaunchAtLogin.Tests" />
+    <InternalsVisibleTo Include="LaunchAtLogin.EndToEnd" />
   </ItemGroup>
 
   <ItemGroup>
