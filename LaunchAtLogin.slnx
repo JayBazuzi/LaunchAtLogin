@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LaunchAtLogin/LaunchAtLogin.csproj" />
+  <Project Path="LaunchAtLogin.EndToEnd/LaunchAtLogin.EndToEnd.csproj" />
+  <Project Path="LaunchAtLogin.Tests/LaunchAtLogin.Tests.csproj" />
+</Solution>

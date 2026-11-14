@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LaunchAtLogin\LaunchAtLogin.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
+    <PackageReference Include="Verify.XunitV3" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Shared with the end-to-end test without referencing it, which would bring in FlaUI and the Windows Desktop runtime. -->
+    <Compile Include="..\LaunchAtLogin.EndToEnd\RegistrySnapshot.cs" Link="EndToEnd\RegistrySnapshot.cs" />
+    <Compile Include="..\LaunchAtLogin.EndToEnd\RecordedRegistrySnapshots.cs" Link="EndToEnd\RecordedRegistrySnapshots.cs" />
+    <Compile Include="..\LaunchAtLogin.EndToEnd\SnapshotName.cs" Link="EndToEnd\SnapshotName.cs" />
+    <Compile Include="..\LaunchAtLogin.EndToEnd\EndToEndFailureException.cs" Link="EndToEnd\EndToEndFailureException.cs" />
+    <Compile Include="..\LaunchAtLogin.EndToEnd\SnapshotMismatchException.cs" Link="EndToEnd\SnapshotMismatchException.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

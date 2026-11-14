@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>LaunchAtLogin</PackageId>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <Description>Launches a Windows app at login, and respects the user turning it off in Task Manager's Startup apps.</Description>
+    <PackageTags>startup;autostart;launch-at-login;run-at-login;task-manager;registry;windows</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <InternalsVisibleTo Include="LaunchAtLogin.Tests" />
+    <InternalsVisibleTo Include="LaunchAtLogin.EndToEnd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="PACKAGE.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
