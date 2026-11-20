@@ -56,7 +56,7 @@ public class StartupApp
     public void AddToStartupApps(string? exePath = null)
     {
         exePath ??= Environment.ProcessPath ?? throw new InvalidOperationException("Can't tell this process's exe path. Pass exePath.");
-        this._registry.SetValue(RunKeyPath, Name, $"\"{exePath}\"", RegistryValueKind.String);
+        this._registry.SetValue(RunKeyPath, Name, InDoubleQuotes(exePath), RegistryValueKind.String);
     }
 
     /// <summary>Removes the app from the startup apps, and forgets whether it was turned off. Call from an uninstaller.</summary>
@@ -97,4 +97,6 @@ public class StartupApp
     {
         this._registry.DeleteValueIfPresent(StartupApprovedKeyPath, Name);
     }
+
+    internal static string InDoubleQuotes(string text) => $"\"{text}\"";
 }
