@@ -66,8 +66,10 @@ When in doubt, use the riskier level.
 ### Refactoring
 
 - `.`: a provable refactoring (done by a trusted automated tool, or by compiler-verified scripted steps), or a test-supported procedural refactoring done entirely in test code.
-- `^`: a single named refactoring done by following its published steps, running the full tests along the way, on well-tested code.
-- `!`: a named refactoring done by hand, or without whole-project test coverage.
+- `^`: a single named refactoring (e.g. Extract Method) on well-tested code, with the full tests run and passing.
+  Doing it by hand rather than with a tool still qualifies.
+  The changed code must be covered by tests; if it isn't, it's `!`.
+- `!`: a named refactoring of code the tests don't cover, or without running the full tests.
 - `@`: restructured by editing code freely, even in small steps.
 
 ### Documentation
