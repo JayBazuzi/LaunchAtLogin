@@ -69,6 +69,23 @@ startupApp.RemoveFromStartupApps();
 <sup><a href='/LaunchAtLogin.EndToEnd/Program.cs#L224-L226' title='Snippet source file'>snippet source</a> | <a href='#snippet-remove-from-startup-apps' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+### With Velopack
+
+If you install and update your app with [Velopack](https://velopack.io), add the `LaunchAtLogin.Velopack` package and register its hooks:
+
+```cs
+VelopackApp.Build()
+    .KeepInStartupApps(new StartupApp(YOUR_APP_NAME))
+    .Run();
+```
+
+It adds your app to the startup apps when Velopack installs it, turned on.
+After each update it rewrites the command, without undoing the user turning it off.
+It removes your app when Velopack uninstalls it.
+Your own Velopack hooks still run.
+
+Don't also use Velopack's `--shortcuts Startup` option: it puts a second entry in the Startup folder, so your app launches twice.
+
 ### Why a new library
 
 No existing NuGet package does this.

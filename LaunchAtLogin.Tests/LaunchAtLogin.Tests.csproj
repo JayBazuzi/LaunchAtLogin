@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LaunchAtLogin\LaunchAtLogin.csproj" />
+    <ProjectReference Include="..\LaunchAtLogin.Velopack\LaunchAtLogin.Velopack.csproj" />
   </ItemGroup>
 
   <ItemGroup>
