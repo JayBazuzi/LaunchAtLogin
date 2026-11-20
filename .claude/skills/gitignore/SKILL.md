@@ -7,7 +7,7 @@ description: Use whenever creating or editing a .gitignore file, or when decidin
 
 The first line of every `.gitignore` must be:
 
-```
+```gitignore
 .ignore/
 ```
 

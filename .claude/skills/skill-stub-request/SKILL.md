@@ -5,12 +5,13 @@ description: Use this skill whenever the user writes a message starting with "sk
 
 # Skill Stub Request
 
-When the user says `skill: <topic>`, they mean: scaffold an empty, minimal skill under their AgentSkills collection (`C:\Code\AgentSkills\skills\<kebab-case-name>\`) so they can fill in the real content themselves later. Do not run the full skill-creator interview/draft/eval loop unless they explicitly ask for that.
+When the user says `skill: <topic>`, they mean: scaffold an empty, minimal skill under their AgentSkills collection (`.claude/skills/<kebab-case-name>/`) so they can fill in the real content themselves later.
+Do not run the full skill-creator interview/draft/eval loop unless they explicitly ask for that.
 
 ## What to do
 
 1. Pick a kebab-case name from the topic (e.g. "CMD scripts" → `cmd-scripts`).
-2. Create `C:\Code\AgentSkills\skills\<name>\SKILL.md` with just a frontmatter stub and a TODO — no real instructions yet:
+1. Create `.claude/skills/<name>/SKILL.md` with just a frontmatter stub and a TODO — no real instructions yet:
 
 ```markdown
 ---
@@ -23,6 +24,6 @@ description: TODO — describe what this skill does and when it should trigger.
 TODO: fill in instructions for this skill.
 ```
 
-3. Confirm briefly with the user that the stub was created and where, so they know it's waiting for them.
+1. Confirm briefly with the user that the stub was created and where, so they know it's waiting for them.
 
 Why this exists: the user builds skills incrementally — they want a placeholder reserved the moment they think of one, without derailing into a full interview/build cycle right then.

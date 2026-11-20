@@ -10,7 +10,7 @@ description: Use whenever creating or editing a .NET (C#/F#) project or solution
 Every .NET repo has a `global.json` at the root to pin the SDK version, so everyone builds with the same SDK.
 Create it with:
 
-```
+```shell
 dotnet new globaljson --sdk-version <installed version> --roll-forward latestFeature
 ```
 

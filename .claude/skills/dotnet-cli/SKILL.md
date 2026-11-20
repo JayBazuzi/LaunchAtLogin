@@ -13,7 +13,7 @@ Do not hand-roll parsing of `args`, and do not use third-party parsers.
 A prerelease version is fine, and preferred if it is newer than the latest stable release.
 Add it with:
 
-```
+```shell
 dotnet add package System.CommandLine --prerelease
 ```
 

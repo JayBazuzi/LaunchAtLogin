@@ -35,11 +35,9 @@ At the end of every task report on all of these, briefly:
 - Skill gaps: if a skill you wished existed would have helped, propose one, even briefly.
 - Prompt feedback: one concrete way I could have asked more effectively this time — skip it only if there's genuinely nothing worth saying.
 - Questions, ideas, concerns: surface them as they come up, not just at the end.
-- Changes to your skills annd isntructions that would reduce token usage or improve efficiency.
+- Changes to your skills and instructions that would reduce token usage or improve efficiency.
 
 Treat this end-of-task report as mandatory, like a checklist item — don't let it get crowded out by concise-output-style guidance; it's a small fixed addition, not a violation of terseness.
-
-Information about this project found in @InternalDocuments/project.md
 
 Never use Claude Code's persistent memory system for this project. Durable guidance (conventions, process corrections, preferences) belongs in-repo instead — this file, `InternalDocuments/`, or a skill — so it's visible in version control and to every contributor, not just stored privately for one user.
 

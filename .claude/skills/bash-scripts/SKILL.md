@@ -26,7 +26,13 @@ set -euo pipefail
 
 - if it's paired with a CMD script, use the same name without a file extension, so `./foo` works on PowerShell, Mac, and Linux.
 - Mark the file executable in git, even on Windows: `git update-index --chmod=+x foo`. After commit, verify that this change took effect with `git ls-files --stage foo`.
-- Use LF line endings; a CRLF shebang line fails with `bad interpreter`. See the gitattributes skill.
+- Use LF line endings; a CRLF shebang line fails with `bad interpreter`.
+  Extensionless scripts can't be matched by a file-type glob, so name each one in the repo's `.editorconfig`:
+
+  ```ini
+  [{build,test}]
+  end_of_line = lf
+  ```
 
 ## Windows entry point
 
