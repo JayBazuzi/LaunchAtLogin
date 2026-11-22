@@ -34,20 +34,4 @@ CI runs the same build-and-test script that developers run locally (see the deve
 
 - Run formatting and mdsnippets and commit
 - Release
-- Check markdown links:
-    ```yaml
-    - uses: tcort/github-action-markdown-link-check@e7c7a18363c842693fadde5d41a3bd3573a7a225 # v1.1.2
-      with:
-        use-quiet-mode: 'yes'
-        config-file: 'mlc_config.json'
-    ```
-    with configuration in `mlc_config.json` at the repo root:
-    ```json
-    {
-      "ignorePatterns": [
-        {
-          "pattern": "^/"
-        }
-      ]
-    }
-    ```
+- Check links with [lychee](https://github.com/lycheeverse/lychee-action) (`link-check.yml`), run with `--root-dir` so root-relative links (`/path`) resolve against the repo root
